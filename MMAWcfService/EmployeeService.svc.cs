@@ -26,19 +26,6 @@ namespace MMAWcfService
             return string.Format("You entered: {0}", realId);
         }
 
-        //public CompositeType GetDataUsingDataContract(CompositeType composite)
-        //{
-        //    if (composite == null)
-        //    {
-        //        throw new ArgumentNullException("composite");
-        //    }
-        //    if (composite.BoolValue)
-        //    {
-        //        composite.StringValue += "Suffix";
-        //    }
-        //    return composite;
-        //}
-
         public IEnumerable<Employee> GetAll()
         {
             return _employees;
@@ -76,8 +63,6 @@ namespace MMAWcfService
 
         public void Delete(Employee employee)
         {
-            Console.WriteLine("Delete methode execute.");
-
             var selectedEmploye = _employees.Where(empl => empl.EmployeeId == employee.EmployeeId).FirstOrDefault();
 
             if (selectedEmploye != null)
@@ -137,7 +122,16 @@ namespace MMAWcfService
 
         public int Register(string uname, string pwd)
         {
-            throw new NotImplementedException();
+            return 454542415;
+        }
+
+        public Employee GetConnect(int value)
+        {
+            int realId = Convert.ToInt32(value);
+
+            var employee = _employees.Where(empl => empl.EmployeeId == realId).FirstOrDefault();
+
+            return employee;
         }
         #endregion
     }    

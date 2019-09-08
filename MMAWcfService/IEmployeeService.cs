@@ -13,13 +13,6 @@ namespace MMAWcfService
     [ServiceContract]
     public interface IEmployeeService
     {
-        //[OperationContract]
-        //[WebInvoke(Method = "GET", UriTemplate = "/GetDataUsingDataContract/",
-        //    RequestFormat = WebMessageFormat.Json,
-        //    ResponseFormat = WebMessageFormat.Json,
-        //    BodyStyle = WebMessageBodyStyle.Bare)]
-        //CompositeType GetDataUsingDataContract(CompositeType composite);
-
         [OperationContract]
         [WebInvoke(Method = "GET", UriTemplate = "/GetData/{value}",
             RequestFormat = WebMessageFormat.Json,
@@ -75,28 +68,12 @@ namespace MMAWcfService
             BodyStyle = WebMessageBodyStyle.Bare, 
             UriTemplate = "Registration/{uname}/{pwd}")]
         int Register(string uname, string pwd);
-    }
 
-
-    // Use a data contract as illustrated in the sample below to add composite types to service operations.
-    [DataContract]
-    public class CompositeType
-    {
-        bool boolValue = true;
-        string stringValue = "Hello ";
-
-        [DataMember]
-        public bool BoolValue
-        {
-            get { return boolValue; }
-            set { boolValue = value; }
-        }
-
-        [DataMember]
-        public string StringValue
-        {
-            get { return stringValue; }
-            set { stringValue = value; }
-        }
+        [OperationContract]
+        [WebInvoke(Method = "GET", UriTemplate = "/GetConnect/?value={value}",
+           RequestFormat = WebMessageFormat.Json,
+           ResponseFormat = WebMessageFormat.Json,
+           BodyStyle = WebMessageBodyStyle.Bare)]
+        Employee GetConnect(int value);
     }
 }

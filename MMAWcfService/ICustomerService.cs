@@ -19,5 +19,10 @@ namespace MMAWcfService
             BodyStyle = WebMessageBodyStyle.Wrapped,
             UriTemplate = "GetCustomers")]
         List<Customer> GetCustomerList();
+
+
+        [DataMember]
+        Dictionary<string, object> QuerySearchTerms { get; set; }
+
     }
 }
