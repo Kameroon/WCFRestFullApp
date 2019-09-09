@@ -1,14 +1,16 @@
-﻿using System;
+﻿using DataProject.Contracts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace MMAWcfService.Models
+namespace DataProject.Implementations
 {
     [DataContract]
     public class Employee : IEmployee
-    {        
+    {
         private int _employeeId;
         private string _employeName;
         private string _employeEmail;
@@ -26,7 +28,7 @@ namespace MMAWcfService.Models
         {
             get { return _employeName; }
             set { _employeName = value; }
-        }        
+        }
 
         [DataMember]
         public string EmployeEmail

@@ -1,11 +1,11 @@
-﻿using System;
+﻿using DataProject.Implementations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
-using MMAWcfService.Models;
 
 namespace MMAWcfService
 {

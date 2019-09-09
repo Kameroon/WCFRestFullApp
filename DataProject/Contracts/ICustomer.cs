@@ -1,4 +1,4 @@
-﻿namespace MMAWcfService.Models
+﻿namespace DataProject.Contracts
 {
     public interface ICustomer
     {

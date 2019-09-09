@@ -76,10 +76,6 @@
     <Compile Include="ICustomerService.cs" />
     <Compile Include="IEmployeeService.cs" />
     <Compile Include="IPayMentService.cs" />
-    <Compile Include="Models\Customer.cs" />
-    <Compile Include="Models\Employee.cs" />
-    <Compile Include="Models\ICustomer.cs" />
-    <Compile Include="Models\IEmployee.cs" />
     <Compile Include="PayMentService.svc.cs">
       <DependentUpon>PayMentService.svc</DependentUpon>
     </Compile>
@@ -95,6 +91,16 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataProject\DataProject.csproj">
+      <Project>{D59A651C-0F14-4B8A-B31D-2B0431D62D0F}</Project>
+      <Name>DataProject</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ReposotoryProject\ReposotoryProject.csproj">
+      <Project>{675D8CD5-71D1-4E33-AA5B-79C25D0DCEA3}</Project>
+      <Name>ReposotoryProject</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

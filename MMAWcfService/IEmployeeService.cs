@@ -1,4 +1,4 @@
-﻿using MMAWcfService.Models;
+﻿using DataProject.Implementations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,20 +13,6 @@ namespace MMAWcfService
     [ServiceContract]
     public interface IEmployeeService
     {
-        [OperationContract]
-        [WebInvoke(Method = "GET", UriTemplate = "/GetData/{value}",
-            RequestFormat = WebMessageFormat.Json,
-            ResponseFormat = WebMessageFormat.Json,
-            BodyStyle = WebMessageBodyStyle.Bare)]
-        string GetData(string value);
-        
-        [OperationContract]
-        [WebInvoke(Method = "GET", UriTemplate = "/EmployeeDetail/{employeeName}",
-            RequestFormat = WebMessageFormat.Json,
-            ResponseFormat = WebMessageFormat.Json,
-            BodyStyle = WebMessageBodyStyle.Wrapped)]  // Configure le service en REST
-        Employee GetEmployeeByName(string employeeName);
-
         [OperationContract]
         [WebGet(UriTemplate = "/GetAll/",
             RequestFormat = WebMessageFormat.Json,
@@ -68,12 +54,5 @@ namespace MMAWcfService
             BodyStyle = WebMessageBodyStyle.Bare, 
             UriTemplate = "Registration/{uname}/{pwd}")]
         int Register(string uname, string pwd);
-
-        [OperationContract]
-        [WebInvoke(Method = "GET", UriTemplate = "/GetConnect/?value={value}",
-           RequestFormat = WebMessageFormat.Json,
-           ResponseFormat = WebMessageFormat.Json,
-           BodyStyle = WebMessageBodyStyle.Bare)]
-        Employee GetConnect(int value);
     }
 }

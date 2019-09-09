@@ -4,7 +4,9 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
-using MMAWcfService.Models;
+using DataProject.Implementations;
+using ReposotoryProject.Contracts;
+using ReposotoryProject.Implementations;
 
 namespace MMAWcfService
 {
@@ -12,127 +14,41 @@ namespace MMAWcfService
     // NOTE: In order to launch WCF Test Client for testing this service, please select EmployeeService.svc or EmployeeService.svc.cs at the Solution Explorer and start debugging.
     public class EmployeeService : IEmployeeService
     {
-        private IEnumerable<Employee> _employees;
+        private IEmployeeRepository _employeeRepository;
 
         public EmployeeService()
         {
-            PopulateEmployees();
-        }
-
-        public string GetData(string value)
-        {
-            int realId = Convert.ToInt32(value);
-
-            return string.Format("You entered: {0}", realId);
-        }
-
-        public IEnumerable<Employee> GetAll()
-        {
-            return _employees;
-        }
-
-        public Employee GetEmployeeByName(string employeeName)
-        {
-            var employee = _employees.Where(empl => empl.EmployeName == employeeName).FirstOrDefault();
-
-            return ManageResult(employee);
+            _employeeRepository = new EmployeeRepository();
         }
 
         public void Add(Employee employee)
         {
-            Console.WriteLine("Add methode execute.");
-
-            var employeList = _employees.ToList();
-
-            employeList.Add(employee);
-        }
-
-        public void Update(Employee employee)
-        {
-            Console.WriteLine("Update methode execute.");
-
-            var selectedEmploye = _employees.Where(empl => empl.EmployeeId == employee.EmployeeId).FirstOrDefault();
-
-            if (selectedEmploye != null)
-            {
-                selectedEmploye.EmployeName = employee.EmployeName;
-                selectedEmploye.EmployeEmail = employee.EmployeEmail;
-                selectedEmploye.EmployeSalary = employee.EmployeSalary;
-            }
+            _employeeRepository.AddNew(employee);
         }
 
         public void Delete(Employee employee)
         {
-            var selectedEmploye = _employees.Where(empl => empl.EmployeeId == employee.EmployeeId).FirstOrDefault();
+            _employeeRepository.Delete(employee.EmployeeId);
+        }
 
-            if (selectedEmploye != null)
-            {
-                _employees.ToList().Remove(employee);
-            }
+        public IEnumerable<Employee> GetAll()
+        {
+            return _employeeRepository.GetAll();
         }
 
         public Employee GetById(string myId)
         {
-            int realId = Convert.ToInt32(myId);
-
-            var employee = _employees.Where(empl => empl.EmployeeId == realId).FirstOrDefault();
-
-            return ManageResult(employee);
-        }
-
-        #region --   --
-        public IEnumerable<Employee> PopulateEmployees()
-        {
-            var employees = new List<Employee>
-            {
-                new Employee(){ EmployeeId = 100,
-                    EmployeName = "Employee 100",
-                    EmployeEmail = "Employe100@compagny.com",
-                    EmployeSalary = 3270},
-                new Employee(){ EmployeeId = 101,
-                    EmployeName = "Employee 101",
-                    EmployeEmail = "Employe101@compagny.com",
-                    EmployeSalary = 3900},
-                new Employee(){ EmployeeId = 102,
-                    EmployeName = "Employee 102",
-                    EmployeEmail = "Employe102@compagny.com",
-                    EmployeSalary = 4020},
-                new Employee(){ EmployeeId = 103,
-                    EmployeName = "Employee 103",
-                    EmployeEmail = "Employe103@compagny.com",
-                    EmployeSalary = 3750}
-            };
-
-            _employees = employees;
-
-            return employees;
-        }
-
-        private Employee ManageResult(Employee employee)
-        {
-            if (employee != null)
-            {
-                return employee;
-            }
-            else
-            {
-                return new Employee();
-            }
+            return _employeeRepository.GetById(Convert.ToInt32(myId));
         }
 
         public int Register(string uname, string pwd)
         {
-            return 454542415;
+            return _employeeRepository.Register(uname, pwd);
         }
 
-        public Employee GetConnect(int value)
+        public void Update(Employee employee)
         {
-            int realId = Convert.ToInt32(value);
-
-            var employee = _employees.Where(empl => empl.EmployeeId == realId).FirstOrDefault();
-
-            return employee;
+            _employeeRepository.Update(employee);
         }
-        #endregion
-    }    
+    }
 }
